@@ -1,0 +1,7 @@
+{
+  "permissions": {
+    "allow": [
+      "PowerShell(Get-ChildItem -Path \"c:\\\\Users\\\\ULTRATOUR\\\\Documents\\\\GitHub\\\\modern-galery-colinas-vistacatole\" -Recurse -File | Measure-Object -Property Length -Sum | Select-Object Count, @{Name=\"TotalMB\";Expression={[math]::Round\\($_.Sum/1MB,2\\)}})"
+    ]
+  }
+}

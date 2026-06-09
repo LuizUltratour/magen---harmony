@@ -1,0 +1,447 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Galeria de Vídeos</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg:           #FFFFFF;
+      --dark:         #000000;
+      --border:       rgba(0,0,0,0.10);
+      --border-strong:rgba(0,0,0,0.22);
+      --font-sans:    'Inter', system-ui, sans-serif;
+      --ease:         cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    html, body {
+      height: 100%;
+      overflow: hidden;
+      background: var(--bg);
+      color: var(--dark);
+      font-family: var(--font-sans);
+    }
+
+    /* ── ROOT ── */
+    #vg-root {
+      display: flex;
+      flex-direction: column;
+      height: 100vh;
+      background: var(--bg);
+    }
+
+    /* ── HEADER ── */
+    #vg-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 12px 24px;
+      border-bottom: 1px solid var(--border);
+      flex-shrink: 0;
+    }
+
+    #vg-title {
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      opacity: 0.4;
+    }
+
+    #btn-close {
+      width: 38px; height: 38px;
+      border: 1px solid var(--border-strong);
+      background: transparent;
+      cursor: pointer;
+      display: flex; align-items: center; justify-content: center;
+      border-radius: 50%;
+      color: var(--dark);
+      transition: background 0.25s var(--ease), color 0.25s var(--ease);
+    }
+    #btn-close:hover { background: var(--dark); color: var(--bg); border-color: var(--dark); }
+
+    /* ── SCROLL + GRID ── */
+    #vg-scroll {
+      flex: 1;
+      overflow-y: auto;
+      scroll-behavior: smooth;
+    }
+    #vg-scroll::-webkit-scrollbar { width: 5px; }
+    #vg-scroll::-webkit-scrollbar-track { background: var(--bg); }
+    #vg-scroll::-webkit-scrollbar-thumb { background: var(--border-strong); border-radius: 3px; }
+
+    #vg-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 3px;
+      padding: 3px;
+    }
+    @media (max-width: 1100px) { #vg-grid { grid-template-columns: repeat(3, 1fr); } }
+    @media (max-width: 700px)  { #vg-grid { grid-template-columns: repeat(2, 1fr); } }
+    @media (max-width: 420px)  { #vg-grid { grid-template-columns: 1fr; } }
+
+    /* ── VIDEO CARD ── */
+    @keyframes cardIn {
+      from { opacity: 0; transform: translateY(10px) scale(0.99); }
+      to   { opacity: 1; transform: none; }
+    }
+
+    .vg-card {
+      position: relative;
+      aspect-ratio: 16/9;
+      overflow: hidden;
+      cursor: pointer;
+      background: #111;
+      animation: cardIn 0.4s var(--ease) both;
+    }
+
+    .vg-card video {
+      width: 100%; height: 100%;
+      object-fit: cover;
+      display: block;
+      pointer-events: none;
+    }
+
+    /* play button */
+    .vg-play {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: rgba(0,0,0,0.18);
+      transition: background 0.25s var(--ease);
+    }
+    .vg-card:hover .vg-play { background: rgba(0,0,0,0.35); }
+
+    .vg-play-icon {
+      width: 52px; height: 52px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.92);
+      display: flex; align-items: center; justify-content: center;
+      transform: scale(0.85);
+      transition: transform 0.25s var(--ease);
+      flex-shrink: 0;
+    }
+    .vg-card:hover .vg-play-icon { transform: scale(1); }
+    .vg-play-icon svg { margin-left: 3px; }
+
+    /* title overlay */
+    .vg-card-info {
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      padding: 28px 14px 13px;
+      background: linear-gradient(to top, rgba(0,0,0,0.88) 0%, rgba(0,0,0,0.4) 60%, transparent 100%);
+      color: #FFFFFF;
+    }
+    .vg-card-title {
+      font-size: 12.5px;
+      font-weight: 600;
+      letter-spacing: 0.02em;
+      line-height: 1.3;
+      text-shadow: 0 1px 6px rgba(0,0,0,0.8);
+    }
+    .vg-card-dur {
+      font-size: 9.5px;
+      font-weight: 400;
+      opacity: 0.7;
+      margin-top: 3px;
+      letter-spacing: 0.04em;
+    }
+
+    /* ── LIGHTBOX ── */
+    #vg-lightbox {
+      position: fixed;
+      inset: 0;
+      z-index: 9000;
+      display: flex;
+      flex-direction: column;
+      background: rgba(0,0,0,0.97);
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.3s ease;
+    }
+    #vg-lightbox.open { opacity: 1; pointer-events: auto; }
+
+    #vl-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 18px 28px;
+      flex-shrink: 0;
+    }
+    #vl-info { display: flex; flex-direction: column; gap: 3px; }
+    #vl-title {
+      font-size: 14px;
+      font-weight: 600;
+      color: #FFFFFF;
+      letter-spacing: 0.02em;
+    }
+    #vl-counter {
+      font-size: 10px;
+      color: rgba(255,255,255,0.35);
+      letter-spacing: 0.06em;
+    }
+    #vl-close {
+      width: 38px; height: 38px;
+      border: 1px solid rgba(255,255,255,0.25);
+      background: transparent;
+      cursor: pointer;
+      display: flex; align-items: center; justify-content: center;
+      border-radius: 50%;
+      color: #FFFFFF;
+      transition: background 0.22s, border-color 0.22s;
+      flex-shrink: 0;
+    }
+    #vl-close:hover { background: #FFFFFF; color: var(--dark); border-color: #FFFFFF; }
+
+    /* video body */
+    #vl-body {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 8px 60px 8px;
+      min-height: 0;
+      position: relative;
+    }
+
+    #vl-player {
+      max-width: 100%;
+      max-height: 100%;
+      width: 100%;
+      outline: none;
+      border-radius: 2px;
+    }
+
+    /* nav arrows */
+    .vl-nav {
+      position: absolute;
+      top: 50%; transform: translateY(-50%);
+      width: 46px; height: 46px;
+      border: 1px solid rgba(255,255,255,0.18);
+      background: transparent;
+      cursor: pointer;
+      display: flex; align-items: center; justify-content: center;
+      border-radius: 50%;
+      color: #FFFFFF;
+      transition: background 0.22s, border-color 0.22s;
+    }
+    .vl-nav:hover { background: rgba(255,255,255,0.1); border-color: rgba(255,255,255,0.35); }
+    .vl-nav:disabled { opacity: 0.18; cursor: default; }
+    #vl-prev { left: 12px; }
+    #vl-next { right: 12px; }
+
+    /* footer */
+    #vl-foot {
+      padding: 10px 28px;
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      flex-shrink: 0;
+    }
+    #vl-hint {
+      font-size: 10px;
+      color: rgba(255,255,255,0.25);
+      letter-spacing: 0.06em;
+    }
+
+    /* mobile */
+    @media (max-width: 600px) {
+      #vg-header { padding: 10px 14px; }
+      #vg-grid { gap: 2px; padding: 2px; }
+      #vl-head { padding: 12px 14px; }
+      #vl-body { padding: 0; }
+      #vl-prev { left: 8px; }
+      #vl-next { right: 8px; }
+      #vl-foot { padding: 8px 14px; }
+      .vl-nav { width: 38px; height: 38px; background: rgba(0,0,0,0.55); border-color: transparent; }
+    }
+  </style>
+</head>
+<body>
+
+<div id="vg-root">
+  <header id="vg-header">
+    <span id="vg-title">Galeria de Vídeos</span>
+    <button id="btn-close" title="Fechar" aria-label="Fechar">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="16" height="16">
+        <path d="M18 6L6 18M6 6l12 12"/>
+      </svg>
+    </button>
+  </header>
+  <div id="vg-scroll">
+    <div id="vg-grid"></div>
+  </div>
+</div>
+
+<!-- Lightbox -->
+<div id="vg-lightbox" role="dialog" aria-modal="true">
+  <div id="vl-head">
+    <div id="vl-info">
+      <div id="vl-title"></div>
+      <div id="vl-counter"></div>
+    </div>
+    <button id="vl-close" aria-label="Fechar">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="15" height="15">
+        <path d="M18 6L6 18M6 6l12 12"/>
+      </svg>
+    </button>
+  </div>
+  <div id="vl-body">
+    <button id="vl-prev" class="vl-nav" aria-label="Anterior">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="20" height="20">
+        <path d="M15 18l-6-6 6-6"/>
+      </svg>
+    </button>
+    <video id="vl-player" controls playsinline></video>
+    <button id="vl-next" class="vl-nav" aria-label="Próximo">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="20" height="20">
+        <path d="M9 18l6-6-6-6"/>
+      </svg>
+    </button>
+  </div>
+  <div id="vl-foot">
+    <span id="vl-hint">ESC para fechar · ← → para navegar</span>
+  </div>
+</div>
+
+<script>
+const VIDEOS = [
+  { id:1,  title:'Órbita — Vista Panorâmica',  src:'assets/videos/VIDEO_ORBITA.mp4' },
+  { id:2,  title:'Complexo',                    src:'assets/videos/FACHADA.mp4' },
+  { id:3,  title:'Complexo — Vista 2',          src:'assets/videos/FACHADA02.mp4' },
+  { id:4,  title:'Piscina — Sky Deck',          src:'assets/videos/PISCINA-ARQUIBANCADA.mp4' },
+  { id:5,  title:'Piscina e Gourmet',           src:'assets/videos/PISCINA-GOURMET.mp4' },
+  { id:6,  title:'Sky Deck',                    src:'assets/videos/ARQUIBANCADA.mp4' },
+  { id:7,  title:'Restaurante Externo',         src:'assets/videos/RESTAURANTE EXTERNO.mp4' },
+  { id:8,  title:'Lobby Residencial',           src:'assets/videos/RECEP-RESidencial.mp4' },
+  { id:9,  title:'Lobby Office',                src:'assets/videos/RECEP-OFFICE.mp4' },
+  { id:10, title:'Lobby Corporativo',           src:'assets/videos/RECEP-CORPORATIVO.mp4' },
+  { id:11, title:'Apartamento Decorado',        src:'assets/videos/DECORADO01.mp4' },
+  { id:12, title:'Apartamento Decorado — 2',    src:'assets/videos/DECORADO02.mp4' },
+];
+
+// ── state ──────────────────────────────────────────────────────
+let currentIdx = -1;
+
+const grid       = document.getElementById('vg-grid');
+const lightbox   = document.getElementById('vg-lightbox');
+const player     = document.getElementById('vl-player');
+const elTitle    = document.getElementById('vl-title');
+const elCounter  = document.getElementById('vl-counter');
+const elPrev     = document.getElementById('vl-prev');
+const elNext     = document.getElementById('vl-next');
+
+// ── grid builder ───────────────────────────────────────────────
+function fmtDur(sec) {
+  if (!sec || isNaN(sec)) return '';
+  const m = Math.floor(sec / 60);
+  const s = String(Math.floor(sec % 60)).padStart(2, '0');
+  return m + ':' + s;
+}
+
+VIDEOS.forEach((item, i) => {
+  const card = document.createElement('div');
+  card.className = 'vg-card';
+  card.style.animationDelay = Math.min(i * 0.04, 0.5) + 's';
+
+  const vid = document.createElement('video');
+  vid.src = item.src;
+  vid.preload = 'metadata';
+  vid.muted = true;
+  vid.playsInline = true;
+
+  const durEl = document.createElement('div');
+  durEl.className = 'vg-card-dur';
+
+  vid.addEventListener('loadedmetadata', () => {
+    // seek a bit in to get a representative frame
+    vid.currentTime = Math.min(2, vid.duration * 0.08);
+    durEl.textContent = fmtDur(vid.duration);
+  });
+
+  const overlay = document.createElement('div');
+  overlay.className = 'vg-play';
+  overlay.innerHTML = `
+    <div class="vg-play-icon">
+      <svg viewBox="0 0 24 24" fill="currentColor" width="22" height="22" color="#000">
+        <path d="M8 5v14l11-7z"/>
+      </svg>
+    </div>`;
+
+  const info = document.createElement('div');
+  info.className = 'vg-card-info';
+  info.innerHTML = `<div class="vg-card-title">${item.title}</div>`;
+  info.appendChild(durEl);
+
+  card.appendChild(vid);
+  card.appendChild(overlay);
+  card.appendChild(info);
+  card.addEventListener('click', () => openVideo(i));
+  grid.appendChild(card);
+});
+
+// ── lightbox ───────────────────────────────────────────────────
+function openVideo(idx) {
+  currentIdx = idx;
+  const item = VIDEOS[idx];
+  player.src = item.src;
+  player.load();
+  player.play();
+  elTitle.textContent = item.title;
+  elCounter.textContent = (idx + 1) + ' / ' + VIDEOS.length;
+  elPrev.disabled = idx === 0;
+  elNext.disabled = idx === VIDEOS.length - 1;
+  lightbox.classList.add('open');
+  document.addEventListener('keydown', onKey);
+}
+
+function closeVideo() {
+  player.pause();
+  player.src = '';
+  lightbox.classList.remove('open');
+  document.removeEventListener('keydown', onKey);
+}
+
+function navVideo(dir) {
+  const ni = currentIdx + dir;
+  if (ni < 0 || ni >= VIDEOS.length) return;
+  openVideo(ni);
+}
+
+function onKey(e) {
+  if (e.key === 'Escape')     closeVideo();
+  if (e.key === 'ArrowLeft')  navVideo(-1);
+  if (e.key === 'ArrowRight') navVideo(1);
+}
+
+// ── events ────────────────────────────────────────────────────
+document.getElementById('btn-close').addEventListener('click', closeGallery);
+document.getElementById('vl-close').addEventListener('click', closeVideo);
+elPrev.addEventListener('click', () => navVideo(-1));
+elNext.addEventListener('click', () => navVideo(1));
+
+// swipe on mobile
+let touchStartX = 0;
+document.getElementById('vl-body').addEventListener('touchstart', e => {
+  touchStartX = e.touches[0].clientX;
+}, { passive: true });
+document.getElementById('vl-body').addEventListener('touchend', e => {
+  const dx = e.changedTouches[0].clientX - touchStartX;
+  if (Math.abs(dx) > 50) navVideo(dx < 0 ? 1 : -1);
+}, { passive: true });
+
+function closeGallery() {
+  if (window.parent !== window) {
+    window.parent.postMessage({ action: 'closeGallery' }, '*');
+  }
+}
+</script>
+</body>
+</html>
