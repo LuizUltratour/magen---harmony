@@ -798,96 +798,48 @@
 // os campos src com os nomes exatos dos arquivos.
 // ================================================================
 const GALLERY_CONFIG = {
-  projectName: 'COLINAS VISTA CATOÉ',
+  projectName: 'HARMONY',
   projectSub:  'EMPREENDIMENTO',
 
   categories: [
-    { id: 'fachada',           label: 'Fachada' },
-    { id: 'lazer',             label: 'Lazer' },
-    { id: 'torre-residencial', label: 'Torre Residencial' },
-    { id: 'torre-office',      label: 'Torre Office' },
-    { id: 'torre-corporativa', label: 'Torre Corporativa' },
+    { id: 'lazer',        label: 'Lazer' },
     {
-      id: 'plantas', label: 'Plantas',
+      id: 'apartamentos', label: 'Apartamentos',
       subs: [
-        { id: 'pl-gerais',       label: 'Gerais' },
-        { id: 'pl-apartamentos', label: 'Apartamentos' },
-        { id: 'pl-duplex',       label: 'Duplex' },
+        { id: 'apt-118m2', label: '118 m²' },
+        { id: 'apt-75m2',  label: '75 m²' },
       ]
     },
+    { id: 'plantas',      label: 'Plantas' },
   ],
 
   items: [
 
-    // FACHADA ───────────────────────────────────────────────────
-    { id:1,  type:'image', category:'fachada', title:'Complexo',                       src:'assets/fachada/FACHADA.jpg',         thumb:'assets/thumbs/fachada/FACHADA.jpg' },
-    { id:2,  type:'image', category:'fachada', title:'Complexo',                       src:'assets/fachada/FACHADA (2).jpg',     thumb:'assets/thumbs/fachada/FACHADA (2).jpg' },
-    { id:3,  type:'image', category:'fachada', title:'Complexo',                       src:'assets/fachada/FACHADA (3).jpg',     thumb:'assets/thumbs/fachada/FACHADA (3).jpg' },
-    { id:4,  type:'image', category:'fachada', title:'Complexo',                       src:'assets/fachada/FACHADA (4).jpg',     thumb:'assets/thumbs/fachada/FACHADA (4).jpg' },
-    { id:5,  type:'image', category:'fachada', title:'Complexo',                       src:'assets/fachada/FACHADA (5).jpg',     thumb:'assets/thumbs/fachada/FACHADA (5).jpg' },
-    { id:6,  type:'image', category:'fachada', title:'Complexo',                       src:'assets/fachada/FACHADA (6).jpg',     thumb:'assets/thumbs/fachada/FACHADA (6).jpg' },
-    { id:7,  type:'image', category:'fachada', title:'Foto Montagem — Park Meraki',    src:'assets/fachada/FOTOINSERCAO.jpg',    thumb:'assets/thumbs/fachada/FOTOINSERCAO.jpg' },
-    { id:8,  type:'image', category:'fachada', title:'Mall',                           src:'assets/fachada/LOJAS.jpg',           thumb:'assets/thumbs/fachada/LOJAS.jpg' },
-    { id:9,  type:'image', category:'fachada', title:'Esquina',                        src:'assets/fachada/ESQUINA.png',         thumb:'assets/thumbs/fachada/ESQUINA.jpg' },
+    // LAZER ─────────────────────────────────────────────────────
+    { id:10, type:'image', category:'lazer', title:'Piscina',          src:'assets/lazer/PISCINA ADULTO E INFANTIL.jpg', thumb:'assets/thumbs/lazer/PISCINA ADULTO E INFANTIL.jpg' },
+    { id:11, type:'image', category:'lazer', title:'Quadra',           src:'assets/lazer/QUADRA.jpg',                    thumb:'assets/thumbs/lazer/QUADRA.jpg' },
+    { id:12, type:'image', category:'lazer', title:'Playground',       src:'assets/lazer/PLAYGROUND.jpg',                thumb:'assets/thumbs/lazer/PLAYGROUND.jpg' },
+    { id:13, type:'image', category:'lazer', title:'Brinquedoteca',    src:'assets/lazer/BRINQUEDOTECA.jpg',             thumb:'assets/thumbs/lazer/BRINQUEDOTECA.jpg' },
+    { id:14, type:'image', category:'lazer', title:'Academia',         src:'assets/lazer/ACADEMIA.jpg',                  thumb:'assets/thumbs/lazer/ACADEMIA.jpg' },
+    { id:15, type:'image', category:'lazer', title:'Varanda Gourmet',  src:'assets/lazer/VARANDA GOURMET.jpg',           thumb:'assets/thumbs/lazer/VARANDA GOURMET.jpg' },
+    { id:16, type:'image', category:'lazer', title:'Salão de Festas',  src:'assets/lazer/SALÃO DE FESTAS.jpg',           thumb:'assets/thumbs/lazer/SALÃO DE FESTAS.jpg' },
+    { id:17, type:'image', category:'lazer', title:'Espaço Gourmet',   src:'assets/lazer/ESPAÇO GOURMET.jpg',            thumb:'assets/thumbs/lazer/ESPAÇO GOURMET.jpg' },
 
-    // LAZER — Sky Deck ──────────────────────────────────────────
-    { id:10, type:'image', category:'lazer', title:'Fitness',                    src:'assets/lazer/FITNESS.jpg',                       thumb:'assets/thumbs/lazer/FITNESS.jpg' },
-    { id:11, type:'image', category:'lazer', title:'Espaço Gourmet',             src:'assets/lazer/GOURMET.jpg',                       thumb:'assets/thumbs/lazer/GOURMET.jpg' },
-    { id:12, type:'image', category:'lazer', title:'Restaurante Interno',        src:'assets/lazer/RESTAURANTE INTERNO.jpg',           thumb:'assets/thumbs/lazer/RESTAURANTE INTERNO.jpg' },
-    { id:13, type:'image', category:'lazer', title:'Restaurante Externo',        src:'assets/lazer/RESTAURANTE EXTERNO.jpg',           thumb:'assets/thumbs/lazer/RESTAURANTE EXTERNO.jpg' },
-    { id:14, type:'image', category:'lazer', title:'Salão de Festas',            src:'assets/lazer/SALAO DE FESTAS INTERNO.jpg',       thumb:'assets/thumbs/lazer/SALAO DE FESTAS INTERNO.jpg' },
-    { id:15, type:'image', category:'lazer', title:'Salão de Festas Externo',    src:'assets/lazer/SALAO DE FESTAS EXTERNO.jpg',       thumb:'assets/thumbs/lazer/SALAO DE FESTAS EXTERNO.jpg' },
-    { id:16, type:'image', category:'lazer', title:'Piscina — Sky Deck',         src:'assets/lazer/PISCINA ARQUIBANCADA-DIA.jpg',      thumb:'assets/thumbs/lazer/PISCINA ARQUIBANCADA-DIA.jpg' },
-    { id:17, type:'image', category:'lazer', title:'Piscina — Pôr do Sol',       src:'assets/lazer/PISCINA ARQUIBANCADA-PORDOSOL.png', thumb:'assets/thumbs/lazer/PISCINA ARQUIBANCADA-PORDOSOL.jpg' },
-    { id:18, type:'image', category:'lazer', title:'Sky Deck',                   src:'assets/lazer/ARQUIBANCADA-DIA.jpg',              thumb:'assets/thumbs/lazer/ARQUIBANCADA-DIA.jpg' },
-    { id:19, type:'image', category:'lazer', title:'Sky Deck — Noite',           src:'assets/lazer/ARQUIBANCADA-NOITE.png',            thumb:'assets/thumbs/lazer/ARQUIBANCADA-NOITE.jpg' },
-    { id:20, type:'image', category:'lazer', title:'Sky Deck — Pôr do Sol',      src:'assets/lazer/ARQUIBANCADA-PORDOSOL.png',         thumb:'assets/thumbs/lazer/ARQUIBANCADA-PORDOSOL.jpg' },
+    // APARTAMENTOS — 118 m² ─────────────────────────────────────
+    { id:20, type:'image', category:'apartamentos', subCategory:'apt-118m2', title:'Sala — Vista 01', src:'assets/apartamentos/118m2/SALA 01.jpg',      thumb:'assets/thumbs/apartamentos/118m2/SALA 01.jpg' },
+    { id:21, type:'image', category:'apartamentos', subCategory:'apt-118m2', title:'Sala — Vista 02', src:'assets/apartamentos/118m2/SALA 02.jpg',      thumb:'assets/thumbs/apartamentos/118m2/SALA 02.jpg' },
+    { id:22, type:'image', category:'apartamentos', subCategory:'apt-118m2', title:'Suíte',           src:'assets/apartamentos/118m2/SUITE.jpg',        thumb:'assets/thumbs/apartamentos/118m2/SUITE.jpg' },
+    { id:23, type:'image', category:'apartamentos', subCategory:'apt-118m2', title:'Suíte Filho',     src:'assets/apartamentos/118m2/SUITE FILHO.jpg',  thumb:'assets/thumbs/apartamentos/118m2/SUITE FILHO.jpg' },
 
-    // TORRE RESIDENCIAL ─────────────────────────────────────────
-    { id:21, type:'image', category:'torre-residencial', title:'Lobby Residencial',     src:'assets/torre residencial/HALL RESIDENCIAL.jpg',  thumb:'assets/thumbs/torre-residencial/HALL RESIDENCIAL.jpg' },
-    { id:22, type:'image', category:'torre-residencial', title:'Apartamento Tipo 40 m²', src:'assets/torre residencial/APTO 40M2.jpg',        thumb:'assets/thumbs/torre-residencial/APTO 40M2.jpg' },
-    { id:23, type:'image', category:'torre-residencial', title:'Apartamento 89 m²',     src:'assets/torre residencial/APTO 89M2.jpg',         thumb:'assets/thumbs/torre-residencial/APTO 89M2.jpg' },
-    { id:24, type:'image', category:'torre-residencial', title:'Apartamento 100 m²',    src:'assets/torre residencial/APTO 100M2.jpg',        thumb:'assets/thumbs/torre-residencial/APTO 100M2.jpg' },
-    { id:25, type:'image', category:'torre-residencial', title:'Apartamento 80 m²',     src:'assets/torre residencial/NOVO APTO 80M2.jpg',    thumb:'assets/thumbs/torre-residencial/NOVO APTO 80M2.jpg' },
-    { id:26, type:'image', category:'torre-residencial', title:'Apartamento Duplex',    src:'assets/torre residencial/DUPLEX.jpg',             thumb:'assets/thumbs/torre-residencial/DUPLEX.jpg' },
+    // APARTAMENTOS — 75 m² ──────────────────────────────────────
+    { id:30, type:'image', category:'apartamentos', subCategory:'apt-75m2', title:'Sala',        src:'assets/apartamentos/75m2/SALA.jpg',       thumb:'assets/thumbs/apartamentos/75m2/SALA.jpg' },
+    { id:31, type:'image', category:'apartamentos', subCategory:'apt-75m2', title:'Suíte',       src:'assets/apartamentos/75m2/SUITE.jpg',       thumb:'assets/thumbs/apartamentos/75m2/SUITE.jpg' },
+    { id:32, type:'image', category:'apartamentos', subCategory:'apt-75m2', title:'Suíte Filha', src:'assets/apartamentos/75m2/SUITE FILHA.jpg', thumb:'assets/thumbs/apartamentos/75m2/SUITE FILHA.jpg' },
 
-    // TORRE OFFICE ──────────────────────────────────────────────
-    { id:27, type:'image', category:'torre-office', title:'Lobby Office',       src:'assets/torre office/HALL   SOCIAL OFFICE.jpg', thumb:'assets/thumbs/torre-office/HALL   SOCIAL OFFICE.jpg' },
-    { id:28, type:'image', category:'torre-office', title:'Sala Comercial',     src:'assets/torre office/SALA COMERCIAL.jpg',       thumb:'assets/thumbs/torre-office/SALA COMERCIAL.jpg' },
-    { id:29, type:'image', category:'torre-office', title:'Consultório Médico', src:'assets/torre office/CONSULTORIO MEDICO.jpg',   thumb:'assets/thumbs/torre-office/CONSULTORIO MEDICO.jpg' },
-    { id:30, type:'image', category:'torre-office', title:'Área Externa',       src:'assets/torre office/AREA EXTERNA.jpg',         thumb:'assets/thumbs/torre-office/AREA EXTERNA.jpg' },
-    { id:31, type:'image', category:'torre-office', title:'Peitoril',           src:'assets/torre office/PEITORIL.png',             thumb:'assets/thumbs/torre-office/PEITORIL.jpg' },
-
-    // TORRE CORPORATIVA ─────────────────────────────────────────
-    { id:32, type:'image', category:'torre-corporativa', title:'Lobby Corporativo',          src:'assets/torre corporativa/HALL CORPORATIVO.jpg',               thumb:'assets/thumbs/torre-corporativa/HALL CORPORATIVO.jpg' },
-    { id:33, type:'image', category:'torre-corporativa', title:'Lounge',                      src:'assets/torre corporativa/LOUNGE.jpg',                         thumb:'assets/thumbs/torre-corporativa/LOUNGE.jpg' },
-    { id:34, type:'image', category:'torre-corporativa', title:'Laje Unificada',              src:'assets/torre corporativa/ESCRITORIO.jpg',                     thumb:'assets/thumbs/torre-corporativa/ESCRITORIO.jpg' },
-    { id:35, type:'image', category:'torre-corporativa', title:'Layout Unificado — 1.241 m²', src:'assets/torre corporativa/CORTE ESQUEMA ESCRITORIO.jpg.jpg',  thumb:'assets/thumbs/torre-corporativa/CORTE ESQUEMA ESCRITORIO.jpg' },
-
-    // PLANTAS > Gerais ──────────────────────────────────────────
-    { id:50, type:'image', category:'plantas', subCategory:'pl-gerais', isPlant:true, title:'Implantação',              src:'assets/plantas/gerais/IMPLANTAÇÃO.jpg',           thumb:'assets/thumbs/plantas/gerais/IMPLANTAÇÃO.jpg' },
-    { id:51, type:'cobertura-plan', category:'plantas', subCategory:'pl-gerais',
-      title:'Pavimentos', area:'', viewBothLabel:'Ver Pav. 19 e Ático', floors:[
-        { label:'Pavimento 19',    src:'assets/plantas/gerais/PAVIMENTO 19.png',    thumb:'assets/thumbs/plantas/gerais/PAVIMENTO 19.png' },
-        { label:'Pavimento Ático', src:'assets/plantas/gerais/PAVIMENTO ATICO.png', thumb:'assets/thumbs/plantas/gerais/PAVIMENTO ATICO.png' },
-    ]},
-    { id:53, type:'image', category:'plantas', subCategory:'pl-gerais', isPlant:true, title:'Office — Laje',            src:'assets/plantas/gerais/OFFICE LAJE.png',            thumb:'assets/thumbs/plantas/gerais/OFFICE LAJE.png' },
-    { id:54, type:'image', category:'plantas', subCategory:'pl-gerais', isPlant:true, title:'Office Duplex — Piso Inferior', src:'assets/plantas/gerais/OFFICE DUPLEX INFERIOR.jpg', thumb:'assets/thumbs/plantas/gerais/OFFICE DUPLEX INFERIOR.jpg' },
-    { id:55, type:'image', category:'plantas', subCategory:'pl-gerais', isPlant:true, title:'Planta — 3 Salas',         src:'assets/plantas/gerais/PLANTA 3 SALAS.png',         thumb:'assets/thumbs/plantas/gerais/PLANTA 3 SALAS.png' },
-    { id:56, type:'image', category:'plantas', subCategory:'pl-gerais', isPlant:true, title:'Planta Consultório',       src:'assets/plantas/gerais/PLANTA CONSULTÓRIO (1).png', thumb:'assets/thumbs/plantas/gerais/PLANTA CONSULTÓRIO (1).png' },
-    { id:57, type:'image', category:'plantas', subCategory:'pl-gerais', isPlant:true, title:'Salas Separadas',          src:'assets/plantas/gerais/SALAS SEPARADAS.png',        thumb:'assets/thumbs/plantas/gerais/SALAS SEPARADAS.png' },
-
-    // PLANTAS > Apartamentos ────────────────────────────────────
-    { id:60, type:'image', category:'plantas', subCategory:'pl-apartamentos', isPlant:true, title:'Planta Tipo — 40 m²',       src:'assets/plantas/apartamentos/APTO 40M2.png',  thumb:'assets/thumbs/plantas/apartamentos/APTO 40M2.png' },
-    { id:61, type:'image', category:'plantas', subCategory:'pl-apartamentos', isPlant:true, title:'Planta Unificada — 80 m²',  src:'assets/plantas/apartamentos/APTO 80M2.png',  thumb:'assets/thumbs/plantas/apartamentos/APTO 80M2.png' },
-    { id:62, type:'image', category:'plantas', subCategory:'pl-apartamentos', isPlant:true, title:'Planta — 100 m²',           src:'assets/plantas/apartamentos/APTO 100M2.png', thumb:'assets/thumbs/plantas/apartamentos/APTO 100M2.png' },
-
-    // PLANTAS > Duplex Office — Piso Inferior e Superior
-    { id:70, type:'cobertura-plan', category:'plantas', subCategory:'pl-duplex',
-      title:'Planta Duplex', area:'332,49 m²', viewBothLabel:'Ver Piso Inferior e Superior', floors:[
-        { label:'Piso Inferior', src:'assets/plantas/duplex/DUPLEX INFERIOR.png',  thumb:'assets/thumbs/plantas/duplex/DUPLEX INFERIOR.png' },
-        { label:'Piso Superior', src:'assets/plantas/duplex/DUPLEX SUPERIOR.png',  thumb:'assets/thumbs/plantas/duplex/DUPLEX SUPERIOR.png' },
-    ]},
+    // PLANTAS ───────────────────────────────────────────────────
+    { id:40, type:'image', category:'plantas', isPlant:true, title:'Planta 118 m²',   src:'assets/plantas/PLANTA HUMANIZADA 118m.jpg',            thumb:'assets/thumbs/plantas/PLANTA HUMANIZADA 118m.jpg' },
+    { id:41, type:'image', category:'plantas', isPlant:true, title:'Planta 75 m²',    src:'assets/plantas/PLANTA HUMANIZADA 75m.jpg',             thumb:'assets/thumbs/plantas/PLANTA HUMANIZADA 75m.jpg' },
+    { id:42, type:'image', category:'plantas', isPlant:true, title:'Pavimento Lazer', src:'assets/plantas/PLANTA HUMANIZADA PAVIMENTO LAZER.png', thumb:'assets/thumbs/plantas/PLANTA HUMANIZADA PAVIMENTO LAZER.png' },
   ],
 };
 
@@ -929,11 +881,7 @@ const MODE = (() => {
 
 // Categorias exibidas no filtro principal conforme modo
 const DISPLAY_CATS = (() => {
-  if (MODE === 'plantas') return [
-    { id: 'pl-gerais',       label: 'Gerais' },
-    { id: 'pl-apartamentos', label: 'Apartamentos' },
-    { id: 'pl-duplex',       label: 'Duplex' },
-  ];
+  if (MODE === 'plantas') return GALLERY_CONFIG.categories.filter(c => c.id === 'plantas');
   if (MODE === 'imagens') return GALLERY_CONFIG.categories.filter(c => c.id !== 'plantas');
   return GALLERY_CONFIG.categories;
 })();
@@ -997,12 +945,8 @@ function filteredItems() {
     if (MODE === 'imagens' && item.category === 'plantas') return false;
 
     // Filtro de categoria
-    if (MODE === 'plantas') {
-      if (item.subCategory !== st.cat) return false;
-    } else {
-      if (st.cat && item.category !== st.cat) return false;
-      if (st.sub && item.subCategory !== st.sub) return false;
-    }
+    if (st.cat && item.category !== st.cat) return false;
+    if (st.sub && item.subCategory !== st.sub) return false;
     return true;
   });
 }
@@ -1049,7 +993,9 @@ function buildImgCard(item) {
   img.alt = item.title;
   img.loading = 'lazy';
   img.addEventListener('load',  () => card.classList.add('loaded'));
-  img.addEventListener('error', () => card.classList.add('loaded'));
+  img.addEventListener('error', () => {
+    if (item.thumb && img.src !== item.src) { img.src = item.src; } else { card.classList.add('loaded'); }
+  });
   if (img.complete) card.classList.add('loaded');
 
   const ov = document.createElement('div');
@@ -1124,7 +1070,9 @@ function buildCobCard(item) {
       if (loadedCount >= item.floors.length) body.classList.add('loaded');
     };
     img.addEventListener('load', onImgLoad);
-    img.addEventListener('error', onImgLoad);
+    img.addEventListener('error', () => {
+      if (floor.thumb && img.src !== floor.src) { img.src = floor.src; } else { onImgLoad(); }
+    });
     if (img.complete) onImgLoad();
 
     const lbl = document.createElement('div');
@@ -1257,8 +1205,8 @@ function closeGallery() {
 // ── init ──────────────────────────────────────────────────────────
 function init() {
   // Filtro inicial depende do modo
-  if (MODE === 'plantas') st.cat = 'pl-gerais';  // primeira sub-categoria de plantas
-  else st.cat = DISPLAY_CATS[0].id; // 'fachada' tanto em modo imagens quanto standalone
+  if (MODE === 'plantas') st.cat = 'plantas';
+  else st.cat = DISPLAY_CATS[0].id;
 
   renderMainFilters();
   renderSubFilters();

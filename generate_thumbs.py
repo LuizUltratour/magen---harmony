@@ -18,14 +18,11 @@ FORCE = '--force' in sys.argv
 
 # (pasta_fonte, pasta_destino_em_thumbs)
 FOLDERS = [
-    ('fachada',                                    'fachada'),
-    ('lazer',                                      'lazer'),
-    ('torre corporativa',                          'torre-corporativa'),
-    ('torre office',                               'torre-office'),
-    ('torre residencial',                          'torre-residencial'),
-    (os.path.join('plantas', 'gerais'),            os.path.join('plantas', 'gerais')),
-    (os.path.join('plantas', 'apartamentos'),      os.path.join('plantas', 'apartamentos')),
-    (os.path.join('plantas', 'duplex'),            os.path.join('plantas', 'duplex')),
+    ('fachada',                                          'fachada'),
+    ('lazer',                                            'lazer'),
+    (os.path.join('apartamentos', '118m2'),              os.path.join('apartamentos', '118m2')),
+    (os.path.join('apartamentos', '75m2'),               os.path.join('apartamentos', '75m2')),
+    ('plantas',                                          'plantas'),
 ]
 
 created = 0
