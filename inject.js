@@ -1,7 +1,7 @@
 (function (w, d) {
   'use strict';
 
-  var GALLERY_URL       = 'https://skylineip.s3.sa-east-1.amazonaws.com/Tour+Virtual/hcon/360-home-office-mall/ferramentas/modern-galery-360/index.html';
+  var GALLERY_URL       = 'https://skylineip.s3.sa-east-1.amazonaws.com/Tour+Virtual/magen/galeria-atual/index.html';
   var VIDEO_GALLERY_URL = 'https://skylineip.s3.sa-east-1.amazonaws.com/Tour+Virtual/hcon/360-home-office-mall/ferramentas/modern-galery-360/video-gallery.html';
 
   var overlay    = null;
